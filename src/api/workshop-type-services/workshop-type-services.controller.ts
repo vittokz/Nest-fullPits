@@ -1,15 +1,26 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
+import { WorkshopTypeService } from 'src/database/entities/WorkshopTypeService';
 import { WorkshopTypeServicesService } from './workshop-type-services.service';
-import { CreateWorkshopTypeServiceDto } from './dto/create-workshop-type-service.dto';
-import { UpdateWorkshopTypeServiceDto } from './dto/update-workshop-type-service.dto';
 
 @Controller('workshop-type-services')
 export class WorkshopTypeServicesController {
-  constructor(private readonly workshopTypeServicesService: WorkshopTypeServicesService) {}
+  constructor(
+    private readonly workshopTypeServicesService: WorkshopTypeServicesService,
+  ) {}
 
   @Post()
-  create(@Body() createWorkshopTypeServiceDto: CreateWorkshopTypeServiceDto) {
-    return this.workshopTypeServicesService.create(createWorkshopTypeServiceDto);
+  create(@Body() createWorkshopTypeServiceDto: WorkshopTypeService) {
+    return this.workshopTypeServicesService.create(
+      createWorkshopTypeServiceDto,
+    );
   }
 
   @Get()
@@ -23,8 +34,14 @@ export class WorkshopTypeServicesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateWorkshopTypeServiceDto: UpdateWorkshopTypeServiceDto) {
-    return this.workshopTypeServicesService.update(+id, updateWorkshopTypeServiceDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateWorkshopTypeServiceDto: WorkshopTypeService,
+  ) {
+    return this.workshopTypeServicesService.update(
+      +id,
+      updateWorkshopTypeServiceDto,
+    );
   }
 
   @Delete(':id')

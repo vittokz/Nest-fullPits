@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { CreateWorkshopPersonServiceCancelHistoryDto } from './dto/create-workshop-person-service-cancel-history.dto';
-import { UpdateWorkshopPersonServiceCancelHistoryDto } from './dto/update-workshop-person-service-cancel-history.dto';
+import { WorkshopPersonServiceCancelHistory } from 'src/database/entities/WorkshopPersonServiceCancelHistory';
 
 @Injectable()
 export class WorkshopPersonServiceCancelHistoryService {
-  create(createWorkshopPersonServiceCancelHistoryDto: CreateWorkshopPersonServiceCancelHistoryDto) {
+  create(
+    createWorkshopPersonServiceCancelHistoryDto: WorkshopPersonServiceCancelHistory,
+  ) {
     return 'This action adds a new workshopPersonServiceCancelHistory';
   }
 
@@ -16,7 +17,10 @@ export class WorkshopPersonServiceCancelHistoryService {
     return `This action returns a #${id} workshopPersonServiceCancelHistory`;
   }
 
-  update(id: number, updateWorkshopPersonServiceCancelHistoryDto: UpdateWorkshopPersonServiceCancelHistoryDto) {
+  update(
+    id: number,
+    updateWorkshopPersonServiceCancelHistoryDto: WorkshopPersonServiceCancelHistory,
+  ) {
     return `This action updates a #${id} workshopPersonServiceCancelHistory`;
   }
 

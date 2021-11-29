@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCountryStateDto } from './dto/create-country-state.dto';
-import { UpdateCountryStateDto } from './dto/update-country-state.dto';
+import { CountryState } from 'src/database/entities/CountryState';
 
 @Injectable()
 export class CountryStateService {
-  create(createCountryStateDto: CreateCountryStateDto) {
+  create(createCountryStateDto: CountryState) {
     return 'This action adds a new countryState';
   }
 
@@ -16,7 +15,7 @@ export class CountryStateService {
     return `This action returns a #${id} countryState`;
   }
 
-  update(id: number, updateCountryStateDto: UpdateCountryStateDto) {
+  update(id: number) {
     return `This action updates a #${id} countryState`;
   }
 

@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { CreateTextDto } from './dto/create-text.dto';
-import { UpdateTextDto } from './dto/update-text.dto';
+import { Text } from 'src/database/entities/Text';
 
 @Injectable()
 export class TextService {
-  create(createTextDto: CreateTextDto) {
+  create(createTextDto: Text) {
     return 'This action adds a new text';
   }
 
@@ -16,7 +15,7 @@ export class TextService {
     return `This action returns a #${id} text`;
   }
 
-  update(id: number, updateTextDto: UpdateTextDto) {
+  update(id: number, updateTextDto: Text) {
     return `This action updates a #${id} text`;
   }
 

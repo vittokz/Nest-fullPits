@@ -1,14 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
+import { Text } from 'src/database/entities/Text';
 import { TextService } from './text.service';
-import { CreateTextDto } from './dto/create-text.dto';
-import { UpdateTextDto } from './dto/update-text.dto';
 
 @Controller('text')
 export class TextController {
   constructor(private readonly textService: TextService) {}
 
   @Post()
-  create(@Body() createTextDto: CreateTextDto) {
+  create(@Body() createTextDto: Text) {
     return this.textService.create(createTextDto);
   }
 
@@ -23,7 +30,7 @@ export class TextController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTextDto: UpdateTextDto) {
+  update(@Param('id') id: string, @Body() updateTextDto: Text) {
     return this.textService.update(+id, updateTextDto);
   }
 

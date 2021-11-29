@@ -1,14 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
+import { Person } from 'src/database/entities/Persona';
 import { PersonService } from './person.service';
-import { CreatePersonDto } from './dto/create-person.dto';
-import { UpdatePersonDto } from './dto/update-person.dto';
 
 @Controller('person')
 export class PersonController {
   constructor(private readonly personService: PersonService) {}
 
   @Post()
-  create(@Body() createPersonDto: CreatePersonDto) {
+  create(@Body() createPersonDto: Person) {
     return this.personService.create(createPersonDto);
   }
 
@@ -23,7 +30,7 @@ export class PersonController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePersonDto: UpdatePersonDto) {
+  update(@Param('id') id: string, @Body() updatePersonDto: Person) {
     return this.personService.update(+id, updatePersonDto);
   }
 

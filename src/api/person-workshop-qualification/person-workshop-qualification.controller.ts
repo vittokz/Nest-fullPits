@@ -1,15 +1,29 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
+import { PersonWorkshopQualification } from 'src/database/entities/PersonWorkshopQualification';
 import { PersonWorkshopQualificationService } from './person-workshop-qualification.service';
-import { CreatePersonWorkshopQualificationDto } from './dto/create-person-workshop-qualification.dto';
-import { UpdatePersonWorkshopQualificationDto } from './dto/update-person-workshop-qualification.dto';
 
 @Controller('person-workshop-qualification')
 export class PersonWorkshopQualificationController {
-  constructor(private readonly personWorkshopQualificationService: PersonWorkshopQualificationService) {}
+  constructor(
+    private readonly personWorkshopQualificationService: PersonWorkshopQualificationService,
+  ) {}
 
   @Post()
-  create(@Body() createPersonWorkshopQualificationDto: CreatePersonWorkshopQualificationDto) {
-    return this.personWorkshopQualificationService.create(createPersonWorkshopQualificationDto);
+  create(
+    @Body()
+    createPersonWorkshopQualificationDto: PersonWorkshopQualification,
+  ) {
+    return this.personWorkshopQualificationService.create(
+      createPersonWorkshopQualificationDto,
+    );
   }
 
   @Get()
@@ -23,8 +37,15 @@ export class PersonWorkshopQualificationController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePersonWorkshopQualificationDto: UpdatePersonWorkshopQualificationDto) {
-    return this.personWorkshopQualificationService.update(+id, updatePersonWorkshopQualificationDto);
+  update(
+    @Param('id') id: string,
+    @Body()
+    updatePersonWorkshopQualificationDto: PersonWorkshopQualification,
+  ) {
+    return this.personWorkshopQualificationService.update(
+      +id,
+      updatePersonWorkshopQualificationDto,
+    );
   }
 
   @Delete(':id')

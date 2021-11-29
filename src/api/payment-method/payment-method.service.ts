@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { CreatePaymentMethodDto } from './dto/create-payment-method.dto';
-import { UpdatePaymentMethodDto } from './dto/update-payment-method.dto';
+import { PaymentMethod } from 'src/database/entities/PaymentMethod';
 
 @Injectable()
 export class PaymentMethodService {
-  create(createPaymentMethodDto: CreatePaymentMethodDto) {
+  create(createPaymentMethodDto: PaymentMethod) {
     return 'This action adds a new paymentMethod';
   }
 
@@ -16,7 +15,7 @@ export class PaymentMethodService {
     return `This action returns a #${id} paymentMethod`;
   }
 
-  update(id: number, updatePaymentMethodDto: UpdatePaymentMethodDto) {
+  update(id: number, updatePaymentMethodDto: PaymentMethod) {
     return `This action updates a #${id} paymentMethod`;
   }
 

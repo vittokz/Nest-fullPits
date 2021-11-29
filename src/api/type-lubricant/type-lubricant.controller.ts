@@ -1,14 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
+import { TypeLubricant } from 'src/database/entities/TypeLubricant';
 import { TypeLubricantService } from './type-lubricant.service';
-import { CreateTypeLubricantDto } from './dto/create-type-lubricant.dto';
-import { UpdateTypeLubricantDto } from './dto/update-type-lubricant.dto';
 
 @Controller('type-lubricant')
 export class TypeLubricantController {
   constructor(private readonly typeLubricantService: TypeLubricantService) {}
 
   @Post()
-  create(@Body() createTypeLubricantDto: CreateTypeLubricantDto) {
+  create(@Body() createTypeLubricantDto: TypeLubricant) {
     return this.typeLubricantService.create(createTypeLubricantDto);
   }
 
@@ -23,7 +30,10 @@ export class TypeLubricantController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTypeLubricantDto: UpdateTypeLubricantDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateTypeLubricantDto: TypeLubricant,
+  ) {
     return this.typeLubricantService.update(+id, updateTypeLubricantDto);
   }
 

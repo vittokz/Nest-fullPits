@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { CreateTypeLubricantDto } from './dto/create-type-lubricant.dto';
-import { UpdateTypeLubricantDto } from './dto/update-type-lubricant.dto';
+import { TypeLubricant } from 'src/database/entities/TypeLubricant';
 
 @Injectable()
 export class TypeLubricantService {
-  create(createTypeLubricantDto: CreateTypeLubricantDto) {
+  create(createTypeLubricantDto: TypeLubricant) {
     return 'This action adds a new typeLubricant';
   }
 
@@ -16,7 +15,7 @@ export class TypeLubricantService {
     return `This action returns a #${id} typeLubricant`;
   }
 
-  update(id: number, updateTypeLubricantDto: UpdateTypeLubricantDto) {
+  update(id: number, updateTypeLubricantDto: TypeLubricant) {
     return `This action updates a #${id} typeLubricant`;
   }
 

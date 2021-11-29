@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { CreateMarcaVehiculoDto } from './dto/create-marca-vehiculo.dto';
-import { UpdateMarcaVehiculoDto } from './dto/update-marca-vehiculo.dto';
+import { MarcaVehiculo } from 'src/database/entities/MarcaVehiculo';
 
 @Injectable()
 export class MarcaVehiculoService {
-  create(createMarcaVehiculoDto: CreateMarcaVehiculoDto) {
+  create(createMarcaVehiculoDto: MarcaVehiculo) {
     return 'This action adds a new marcaVehiculo';
   }
 
@@ -16,7 +15,7 @@ export class MarcaVehiculoService {
     return `This action returns a #${id} marcaVehiculo`;
   }
 
-  update(id: number, updateMarcaVehiculoDto: UpdateMarcaVehiculoDto) {
+  update(id: number, updateMarcaVehiculoDto: MarcaVehiculo) {
     return `This action updates a #${id} marcaVehiculo`;
   }
 

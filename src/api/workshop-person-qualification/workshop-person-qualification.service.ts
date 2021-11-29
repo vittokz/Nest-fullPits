@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { CreateWorkshopPersonQualificationDto } from './dto/create-workshop-person-qualification.dto';
-import { UpdateWorkshopPersonQualificationDto } from './dto/update-workshop-person-qualification.dto';
+import { WorkshopPersonQualification } from 'src/database/entities/WorkshopPersonQualification';
 
 @Injectable()
 export class WorkshopPersonQualificationService {
-  create(createWorkshopPersonQualificationDto: CreateWorkshopPersonQualificationDto) {
+  create(createWorkshopPersonQualificationDto: WorkshopPersonQualification) {
     return 'This action adds a new workshopPersonQualification';
   }
 
@@ -16,7 +15,10 @@ export class WorkshopPersonQualificationService {
     return `This action returns a #${id} workshopPersonQualification`;
   }
 
-  update(id: number, updateWorkshopPersonQualificationDto: UpdateWorkshopPersonQualificationDto) {
+  update(
+    id: number,
+    updateWorkshopPersonQualificationDto: WorkshopPersonQualification,
+  ) {
     return `This action updates a #${id} workshopPersonQualification`;
   }
 

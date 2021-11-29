@@ -1,14 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
+import { PaymentMethod } from 'src/database/entities/PaymentMethod';
 import { PaymentMethodService } from './payment-method.service';
-import { CreatePaymentMethodDto } from './dto/create-payment-method.dto';
-import { UpdatePaymentMethodDto } from './dto/update-payment-method.dto';
 
 @Controller('payment-method')
 export class PaymentMethodController {
   constructor(private readonly paymentMethodService: PaymentMethodService) {}
 
   @Post()
-  create(@Body() createPaymentMethodDto: CreatePaymentMethodDto) {
+  create(@Body() createPaymentMethodDto: PaymentMethod) {
     return this.paymentMethodService.create(createPaymentMethodDto);
   }
 
@@ -23,7 +30,10 @@ export class PaymentMethodController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePaymentMethodDto: UpdatePaymentMethodDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updatePaymentMethodDto: PaymentMethod,
+  ) {
     return this.paymentMethodService.update(+id, updatePaymentMethodDto);
   }
 

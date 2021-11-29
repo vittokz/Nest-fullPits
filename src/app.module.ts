@@ -24,6 +24,27 @@ import { WorkshopPersonQualificationModule } from './api/workshop-person-qualifi
 import { WorkshopPersonServiceCancelHistoryModule } from './api/workshop-person-service-cancel-history/workshop-person-service-cancel-history.module';
 import { WorkshopPersonServiceModule } from './api/workshop-person-service/workshop-person-service.module';
 import { WorkshopTypeServicesModule } from './api/workshop-type-services/workshop-type-services.module';
+import { City } from './database/entities/City';
+import { CountryState } from './database/entities/CountryState';
+import { Fuel } from './database/entities/fuel';
+import { MensajeChat } from './database/entities/MensajeChat';
+import { LineaVehiculo } from './database/entities/LineaVehiculo';
+import { MarcaVehiculo } from './database/entities/MarcaVehiculo';
+import { PaymentMethod } from './database/entities/PaymentMethod';
+import { Person } from './database/entities/Persona';
+import { PersonWorkshopFavourite } from './database/entities/PersonWorkshopFavourite';
+import { PersonWorkshopQualification } from './database/entities/PersonWorkshopQualification';
+import { Text } from './database/entities/Text';
+import { TypeLubricant } from './database/entities/TypeLubricant';
+import { TypeVehicle } from './database/entities/TypeVehicle';
+import { TypeService } from './database/entities/TypeService';
+import { Vehiculo } from './database/entities/Vehiculo';
+import { Workshop } from './database/entities/Workshop';
+import { WorkshopPersonQualification } from './database/entities/WorkshopPersonQualification';
+import { WorkshopPersonService } from './database/entities/WorkshopPersonService';
+import { WorkshopPersonServiceCancelHistory } from './database/entities/WorkshopPersonServiceCancelHistory';
+import { WorkshopPersonServiceProblem } from './database/entities/WorkshopPersonServiceProblem';
+import { WorkshopTypeService } from './database/entities/WorkshopTypeService';
 
 @Module({
   imports: [
@@ -34,7 +55,30 @@ import { WorkshopTypeServicesModule } from './api/workshop-type-services/worksho
       username: 'inndexadmin',
       password: 'n7614t1A!Qefxab',
       database: 'inndex_db',
-      entities: [Country],
+      entities: [
+        City,
+        Country,
+        CountryState,
+        Fuel,
+        LineaVehiculo,
+        MarcaVehiculo,
+        MensajeChat,
+        PaymentMethod,
+        Person,
+        PersonWorkshopFavourite,
+        PersonWorkshopQualification,
+        Text,
+        TypeLubricant,
+        TypeService,
+        TypeVehicle,
+        Vehiculo,
+        Workshop,
+        WorkshopPersonQualification,
+        WorkshopPersonService,
+        WorkshopPersonServiceCancelHistory,
+        WorkshopPersonServiceProblem,
+        WorkshopTypeService,
+      ],
       logging: false,
       synchronize: false,
     }),

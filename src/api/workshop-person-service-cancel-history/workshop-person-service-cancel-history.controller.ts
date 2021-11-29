@@ -1,15 +1,29 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
+import { WorkshopPersonServiceCancelHistory } from 'src/database/entities/WorkshopPersonServiceCancelHistory';
 import { WorkshopPersonServiceCancelHistoryService } from './workshop-person-service-cancel-history.service';
-import { CreateWorkshopPersonServiceCancelHistoryDto } from './dto/create-workshop-person-service-cancel-history.dto';
-import { UpdateWorkshopPersonServiceCancelHistoryDto } from './dto/update-workshop-person-service-cancel-history.dto';
 
 @Controller('workshop-person-service-cancel-history')
 export class WorkshopPersonServiceCancelHistoryController {
-  constructor(private readonly workshopPersonServiceCancelHistoryService: WorkshopPersonServiceCancelHistoryService) {}
+  constructor(
+    private readonly workshopPersonServiceCancelHistoryService: WorkshopPersonServiceCancelHistoryService,
+  ) {}
 
   @Post()
-  create(@Body() createWorkshopPersonServiceCancelHistoryDto: CreateWorkshopPersonServiceCancelHistoryDto) {
-    return this.workshopPersonServiceCancelHistoryService.create(createWorkshopPersonServiceCancelHistoryDto);
+  create(
+    @Body()
+    createWorkshopPersonServiceCancelHistoryDto: WorkshopPersonServiceCancelHistory,
+  ) {
+    return this.workshopPersonServiceCancelHistoryService.create(
+      createWorkshopPersonServiceCancelHistoryDto,
+    );
   }
 
   @Get()
@@ -23,8 +37,15 @@ export class WorkshopPersonServiceCancelHistoryController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateWorkshopPersonServiceCancelHistoryDto: UpdateWorkshopPersonServiceCancelHistoryDto) {
-    return this.workshopPersonServiceCancelHistoryService.update(+id, updateWorkshopPersonServiceCancelHistoryDto);
+  update(
+    @Param('id') id: string,
+    @Body()
+    updateWorkshopPersonServiceCancelHistoryDto: WorkshopPersonServiceCancelHistory,
+  ) {
+    return this.workshopPersonServiceCancelHistoryService.update(
+      +id,
+      updateWorkshopPersonServiceCancelHistoryDto,
+    );
   }
 
   @Delete(':id')

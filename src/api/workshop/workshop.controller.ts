@@ -1,14 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
+import { Workshop } from 'src/database/entities/Workshop';
 import { WorkshopService } from './workshop.service';
-import { CreateWorkshopDto } from './dto/create-workshop.dto';
-import { UpdateWorkshopDto } from './dto/update-workshop.dto';
 
 @Controller('workshop')
 export class WorkshopController {
   constructor(private readonly workshopService: WorkshopService) {}
 
   @Post()
-  create(@Body() createWorkshopDto: CreateWorkshopDto) {
+  create(@Body() createWorkshopDto: Workshop) {
     return this.workshopService.create(createWorkshopDto);
   }
 
@@ -23,7 +30,7 @@ export class WorkshopController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateWorkshopDto: UpdateWorkshopDto) {
+  update(@Param('id') id: string, @Body() updateWorkshopDto: Workshop) {
     return this.workshopService.update(+id, updateWorkshopDto);
   }
 
