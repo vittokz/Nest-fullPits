@@ -7,25 +7,21 @@ import { Repository } from 'typeorm';
 export class LineaVehiculoService {
   constructor(
     @InjectRepository(LineaVehiculo)
-    private Repository: Repository<LineaVehiculo>,
+    private lineaVehiculoRepository: Repository<LineaVehiculo>,
   ) {}
   create(createLineaVehiculoDto: LineaVehiculo) {
-    return 'This action adds a new lineaVehiculo';
+    return this.lineaVehiculoRepository.save(createLineaVehiculoDto);
   }
 
-  findAll() {
-    return `This action returns all lineaVehiculo`;
+  findByMarcaId(id: number) {
+    return this.lineaVehiculoRepository.find({
+      where: { marca: { id: id } },
+    });
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} lineaVehiculo`;
-  }
-
-  update(id: number, updateLineaVehiculoDto: LineaVehiculo) {
-    return `This action updates a #${id} lineaVehiculo`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} lineaVehiculo`;
+    return this.lineaVehiculoRepository.findOne({
+      id: id,
+    });
   }
 }

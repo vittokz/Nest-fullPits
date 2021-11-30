@@ -6,25 +6,16 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class MensajeChatService {
   constructor(
-    @InjectRepository(MensajeChat) private Repository: Repository<MensajeChat>,
+    @InjectRepository(MensajeChat)
+    private mensajeChatRepository: Repository<MensajeChat>,
   ) {}
-  create(createMensajeChatDto: MensajeChat) {
-    return 'This action adds a new mensajeChat';
+  create(createMensajeChatDto: MensajeChat[]) {
+    return this.mensajeChatRepository.save(createMensajeChatDto);
   }
 
-  findAll() {
-    return `This action returns all mensajeChat`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} mensajeChat`;
-  }
-
-  update(id: number, updateMensajeChatDto: MensajeChat) {
-    return `This action updates a #${id} mensajeChat`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} mensajeChat`;
+  findAll(roomChatId: String) {
+    return this.mensajeChatRepository.find({
+      where: { roomChatId: roomChatId },
+    });
   }
 }

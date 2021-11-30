@@ -1,16 +1,8 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
 import { CountryState } from 'src/database/entities/CountryState';
 import { CountryStateService } from './country-state.service';
 
-@Controller('country-state')
+@Controller('countryState')
 export class CountryStateController {
   constructor(private readonly countryStateService: CountryStateService) {}
 
@@ -20,22 +12,12 @@ export class CountryStateController {
   }
 
   @Get()
-  findAll() {
-    return this.countryStateService.findAll();
+  findAll(@Query('id') id: number) {
+    return this.countryStateService.find(id);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.countryStateService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string) {
-    return this.countryStateService.update(+id);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.countryStateService.remove(+id);
+    return this.countryStateService.findByCountry(+id);
   }
 }

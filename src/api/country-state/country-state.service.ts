@@ -13,12 +13,16 @@ export class CountryStateService {
     return 'This action adds a new countryState';
   }
 
-  findAll() {
-    return `This action returns all countryState`;
+  find(id: number) {
+    return this.countryStateRepository.findOne({
+      id: id,
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} countryState`;
+  findByCountry(id: number) {
+    return this.countryStateRepository.find({
+      where: { country: { id: id } },
+    });
   }
 
   update(id: number) {

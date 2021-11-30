@@ -6,11 +6,12 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { MarcaVehiculo } from 'src/database/entities/MarcaVehiculo';
 import { MarcaVehiculoService } from './marca-vehiculo.service';
 
-@Controller('marca-vehiculo')
+@Controller('marcas-vehiculos')
 export class MarcaVehiculoController {
   constructor(private readonly marcaVehiculoService: MarcaVehiculoService) {}
 
@@ -24,21 +25,13 @@ export class MarcaVehiculoController {
     return this.marcaVehiculoService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.marcaVehiculoService.findOne(+id);
+  @Get('get-by-id')
+  findById(@Query('id') id: number) {
+    return this.marcaVehiculoService.findById(id);
   }
 
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateMarcaVehiculoDto: MarcaVehiculo,
-  ) {
-    return this.marcaVehiculoService.update(+id, updateMarcaVehiculoDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.marcaVehiculoService.remove(+id);
+  @Get('get-by-type-vehicle')
+  getByTypeVehicle(@Query('typeVehicleId') id: number) {
+    return this.marcaVehiculoService.findByTypeVehicle(id);
   }
 }

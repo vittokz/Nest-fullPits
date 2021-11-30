@@ -7,25 +7,25 @@ import { Repository } from 'typeorm';
 export class MarcaVehiculoService {
   constructor(
     @InjectRepository(MarcaVehiculo)
-    private Repository: Repository<MarcaVehiculo>,
+    private marcaVehiculoRepository: Repository<MarcaVehiculo>,
   ) {}
   create(createMarcaVehiculoDto: MarcaVehiculo) {
-    return 'This action adds a new marcaVehiculo';
+    return this.marcaVehiculoRepository.save(createMarcaVehiculoDto);
   }
 
   findAll() {
-    return `This action returns all marcaVehiculo`;
+    return this.marcaVehiculoRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} marcaVehiculo`;
+  findById(id: number) {
+    return this.marcaVehiculoRepository.findOne({
+      id: id,
+    });
   }
 
-  update(id: number, updateMarcaVehiculoDto: MarcaVehiculo) {
-    return `This action updates a #${id} marcaVehiculo`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} marcaVehiculo`;
+  findByTypeVehicle(typeVehicleId: number) {
+    return this.marcaVehiculoRepository.find({
+      where: { typeVehicleId: typeVehicleId },
+    });
   }
 }

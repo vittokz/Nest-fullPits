@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { MensajeChat } from 'src/database/entities/MensajeChat';
 import { MensajeChatService } from './mensaje-chat.service';
@@ -15,27 +16,13 @@ export class MensajeChatController {
   constructor(private readonly mensajeChatService: MensajeChatService) {}
 
   @Post()
-  create(@Body() createMensajeChatDto: MensajeChat) {
-    return this.mensajeChatService.create(createMensajeChatDto);
+  create(@Body() createMensajeChatDto: MensajeChat[]) {
+    this.mensajeChatService.create(createMensajeChatDto);
+    return createMensajeChatDto[0];
   }
 
   @Get()
-  findAll() {
-    return this.mensajeChatService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.mensajeChatService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateMensajeChatDto: MensajeChat) {
-    return this.mensajeChatService.update(+id, updateMensajeChatDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.mensajeChatService.remove(+id);
+  findAll(@Query('roomChatId') roomChatId: string) {
+    return this.mensajeChatService.findAll(roomChatId);
   }
 }
