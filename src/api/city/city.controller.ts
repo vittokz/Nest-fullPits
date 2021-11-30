@@ -1,15 +1,7 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Query } from '@nestjs/common';
 import { CityService } from './city.service';
 
-@Controller('city')
+@Controller('cities')
 export class CityController {
   constructor(private readonly cityService: CityService) {}
 
@@ -18,23 +10,13 @@ export class CityController {
     //return this.cityService.create(createCityDto);
   }
 
+  @Get('getByCountryState')
+  getByCountryState(@Query('id') id: number) {
+    return this.cityService.findByCountryState(id);
+  }
+
   @Get()
-  findAll() {
-    return this.cityService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Query('id') id: number) {
     return this.cityService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string) {
-    //return this.cityService.update(+id, updateCityDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.cityService.remove(+id);
   }
 }

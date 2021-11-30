@@ -5,7 +5,6 @@ import { CountryController } from './api/countries/country/country.controller';
 import { CountryService } from './api/countries/country/country.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Country } from './database/entities/Country';
-import { Connection } from 'typeorm';
 import { CountryStateModule } from './api/country-state/country-state.module';
 import { CityModule } from './api/city/city.module';
 import { LineaVehiculoModule } from './api/linea-vehiculo/linea-vehiculo.module';

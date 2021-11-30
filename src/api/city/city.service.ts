@@ -9,16 +9,21 @@ export class CityService {
     @InjectRepository(City) private cityRepository: Repository<City>,
   ) {}
 
-  create() {
-    return 'This action adds a new city';
+  create(city: City) {
+    return this.cityRepository.save(city);
   }
 
-  findAll() {
-    return `This action returns all city`;
+  findByCountryState(idCountryState: number) {
+    return this.cityRepository.find({
+      where: { countryState: { id: idCountryState } },
+    });
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} city`;
+    let cities = this.cityRepository.findOne({
+      id: id,
+    });
+    return cities;
   }
 
   update(id: number) {
