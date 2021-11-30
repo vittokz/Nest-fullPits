@@ -1,8 +1,13 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { MensajeChat } from 'src/database/entities/MensajeChat';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class MensajeChatService {
+  constructor(
+    @InjectRepository(MensajeChat) private Repository: Repository<MensajeChat>,
+  ) {}
   create(createMensajeChatDto: MensajeChat) {
     return 'This action adds a new mensajeChat';
   }

@@ -1,8 +1,14 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { TypeService } from 'src/database/entities/TypeService';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class TypeServiceService {
+  constructor(
+    @InjectRepository(TypeService)
+    private Repository: Repository<TypeService>,
+  ) {}
   create(createTypeServiceDto: TypeService) {
     return 'This action adds a new typeService';
   }

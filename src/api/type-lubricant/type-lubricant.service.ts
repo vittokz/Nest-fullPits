@@ -1,8 +1,14 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { TypeLubricant } from 'src/database/entities/TypeLubricant';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class TypeLubricantService {
+  constructor(
+    @InjectRepository(TypeLubricant)
+    private Repository: Repository<TypeLubricant>,
+  ) {}
   create(createTypeLubricantDto: TypeLubricant) {
     return 'This action adds a new typeLubricant';
   }

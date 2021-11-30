@@ -1,8 +1,14 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { WorkshopPersonServiceCancelHistory } from 'src/database/entities/WorkshopPersonServiceCancelHistory';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class WorkshopPersonServiceCancelHistoryService {
+  constructor(
+    @InjectRepository(WorkshopPersonServiceCancelHistory)
+    private workshopPersonServiceCancelHistoryRepository: Repository<WorkshopPersonServiceCancelHistory>,
+  ) {}
   create(
     createWorkshopPersonServiceCancelHistoryDto: WorkshopPersonServiceCancelHistory,
   ) {

@@ -1,8 +1,14 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { PersonWorkshopQualification } from 'src/database/entities/PersonWorkshopQualification';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class PersonWorkshopQualificationService {
+  constructor(
+    @InjectRepository(PersonWorkshopQualification)
+    private Repository: Repository<PersonWorkshopQualification>,
+  ) {}
   create(createPersonWorkshopQualificationDto: PersonWorkshopQualification) {
     return 'This action adds a new personWorkshopQualification';
   }

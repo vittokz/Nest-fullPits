@@ -1,7 +1,14 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { City } from 'src/database/entities/City';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class CityService {
+  constructor(
+    @InjectRepository(City) private cityRepository: Repository<City>,
+  ) {}
+
   create() {
     return 'This action adds a new city';
   }

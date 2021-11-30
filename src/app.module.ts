@@ -82,7 +82,7 @@ import { WorkshopTypeService } from './database/entities/WorkshopTypeService';
       logging: false,
       synchronize: false,
     }),
-    TypeOrmModule.forFeature([Country]),
+    TypeOrmModule.forFeature([Country, CountryState]),
     CountryStateModule,
     CityModule,
     LineaVehiculoModule,

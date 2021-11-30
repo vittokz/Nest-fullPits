@@ -1,8 +1,14 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { WorkshopTypeService } from 'src/database/entities/WorkshopTypeService';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class WorkshopTypeServicesService {
+  constructor(
+    @InjectRepository(WorkshopTypeService)
+    private workshopTypeServiceRepository: Repository<WorkshopTypeService>,
+  ) {}
   create(createWorkshopTypeServiceDto: WorkshopTypeService) {
     return 'This action adds a new workshopTypeService';
   }
