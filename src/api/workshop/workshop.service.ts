@@ -14,7 +14,7 @@ export class WorkshopService {
   ) {}
   create(createWorkshopDto: Workshop) {
     if (createWorkshopDto.id) {
-      this.findOne(createWorkshopDto.id).then((workshopUpdate) => {
+      this.findById(createWorkshopDto.id).then((workshopUpdate) => {
         workshopUpdate.name = createWorkshopDto.name;
         workshopUpdate.address = createWorkshopDto.address;
         workshopUpdate.phoneContact = createWorkshopDto.phoneContact;
@@ -102,7 +102,7 @@ export class WorkshopService {
   }
 
   updateTypeServices(updateWorkshopDto: Workshop) {
-    this.findOne(updateWorkshopDto.id).then((workshop) => {
+    this.findById(updateWorkshopDto.id).then((workshop) => {
       workshop.workshopTypeServices = updateWorkshopDto.workshopTypeServices;
       return this.workshopRepository.save(workshop);
     });
@@ -110,7 +110,7 @@ export class WorkshopService {
   }
 
   updateOnlineStatus(updateWorkshopDto: Workshop) {
-    this.findOne(updateWorkshopDto.id).then((workshop) => {
+    this.findById(updateWorkshopDto.id).then((workshop) => {
       workshop.online = updateWorkshopDto.online;
       return this.workshopRepository.save(workshop);
     });
@@ -118,7 +118,7 @@ export class WorkshopService {
   }
 
   updateTypeVehicles(updateWorkshopDto: Workshop) {
-    this.findOne(updateWorkshopDto.id).then((workshop) => {
+    this.findById(updateWorkshopDto.id).then((workshop) => {
       workshop.typeVehicleList = updateWorkshopDto.typeVehicleList;
       return this.workshopRepository.save(workshop);
     });
@@ -126,7 +126,7 @@ export class WorkshopService {
   }
 
   updateMessagingToken(updateWorkshopDto: Workshop) {
-    this.findOne(updateWorkshopDto.id).then((workshop) => {
+    this.findById(updateWorkshopDto.id).then((workshop) => {
       workshop.firebaseMessagingToken =
         updateWorkshopDto.firebaseMessagingToken;
       return this.workshopRepository.save(workshop);
