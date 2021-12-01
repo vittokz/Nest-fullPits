@@ -6,39 +6,36 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { PaymentMethod } from 'src/database/entities/PaymentMethod';
+import { WorkshopService } from '../workshop/workshop.service';
 import { PaymentMethodService } from './payment-method.service';
 
 @Controller('payment-method')
 export class PaymentMethodController {
-  constructor(private readonly paymentMethodService: PaymentMethodService) {}
+  constructor(
+    private readonly paymentMethodService: PaymentMethodService,
+    private readonly workshopService: WorkshopService,
+  ) {}
 
   @Post()
   create(@Body() createPaymentMethodDto: PaymentMethod) {
     return this.paymentMethodService.create(createPaymentMethodDto);
   }
 
+  /*@Get('get-by-workshop-id')
+  findByWorkshopId(@Query('id') id: number) {
+    return this.paymentMethodService.findByWorkshopId(id);
+  }*/
+
+  @Get('get-by-id')
+  findOne(@Query('id') id: number) {
+    return this.paymentMethodService.findById(id);
+  }
+
   @Get()
   findAll() {
     return this.paymentMethodService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.paymentMethodService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updatePaymentMethodDto: PaymentMethod,
-  ) {
-    return this.paymentMethodService.update(+id, updatePaymentMethodDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.paymentMethodService.remove(+id);
   }
 }
