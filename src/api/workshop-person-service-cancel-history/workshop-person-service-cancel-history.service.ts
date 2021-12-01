@@ -10,7 +10,7 @@ export class WorkshopPersonServiceCancelHistoryService {
     private workshopPersonServiceCancelHistoryRepository: Repository<WorkshopPersonServiceCancelHistory>,
   ) {}
   create(
-    createWorkshopPersonServiceCancelHistoryDto: WorkshopPersonServiceCancelHistory,
+    workshopPersonServiceCancelHistoryDto: WorkshopPersonServiceCancelHistory,
   ) {
     return 'This action adds a new workshopPersonServiceCancelHistory';
   }
@@ -25,7 +25,7 @@ export class WorkshopPersonServiceCancelHistoryService {
 
   update(
     id: number,
-    updateWorkshopPersonServiceCancelHistoryDto: WorkshopPersonServiceCancelHistory,
+    workshopPersonServiceCancelHistoryDto: WorkshopPersonServiceCancelHistory,
   ) {
     return `This action updates a #${id} workshopPersonServiceCancelHistory`;
   }

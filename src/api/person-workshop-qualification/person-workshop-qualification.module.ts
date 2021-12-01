@@ -3,9 +3,15 @@ import { PersonWorkshopQualificationService } from './person-workshop-qualificat
 import { PersonWorkshopQualificationController } from './person-workshop-qualification.controller';
 import { PersonWorkshopQualification } from 'src/database/entities/PersonWorkshopQualification';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { WorkshopPersonService } from 'src/database/entities/WorkshopPersonService';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([PersonWorkshopQualification])],
+  imports: [
+    TypeOrmModule.forFeature([
+      PersonWorkshopQualification,
+      WorkshopPersonService,
+    ]),
+  ],
   controllers: [PersonWorkshopQualificationController],
   providers: [PersonWorkshopQualificationService],
 })

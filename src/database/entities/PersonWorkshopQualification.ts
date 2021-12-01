@@ -1,4 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { WorkshopPersonService } from './WorkshopPersonService';
 
 @Entity({ name: 'person_workshop_qualification' })
 export class PersonWorkshopQualification {
@@ -13,4 +14,6 @@ export class PersonWorkshopQualification {
 
   @Column({ name: 'date_qualification' })
   dateQualification: Date;
+
+  workShopPersonService: WorkshopPersonService;
 }

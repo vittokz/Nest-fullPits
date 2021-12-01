@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { PersonWorkshopQualification } from 'src/database/entities/PersonWorkshopQualification';
 import { PersonWorkshopQualificationService } from './person-workshop-qualification.service';
@@ -26,30 +27,12 @@ export class PersonWorkshopQualificationController {
     );
   }
 
-  @Get()
-  findAll() {
-    return this.personWorkshopQualificationService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.personWorkshopQualificationService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body()
-    updatePersonWorkshopQualificationDto: PersonWorkshopQualification,
+  @Get('get-by-worshop-person-service')
+  findByWorkshopPersonServiceId(
+    @Query('workshopPersonServiceId') workshopPersonServiceId: number,
   ) {
-    return this.personWorkshopQualificationService.update(
-      +id,
-      updatePersonWorkshopQualificationDto,
+    return this.personWorkshopQualificationService.findByWorkshopPersonServiceId(
+      workshopPersonServiceId,
     );
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.personWorkshopQualificationService.remove(+id);
   }
 }

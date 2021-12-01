@@ -9,23 +9,28 @@ export class WorkshopTypeServicesService {
     @InjectRepository(WorkshopTypeService)
     private workshopTypeServiceRepository: Repository<WorkshopTypeService>,
   ) {}
-  create(createWorkshopTypeServiceDto: WorkshopTypeService) {
-    return 'This action adds a new workshopTypeService';
+  save(createWorkshopTypeServiceDto: WorkshopTypeService) {
+    return this.workshopTypeServiceRepository.save(
+      createWorkshopTypeServiceDto,
+    );
   }
 
-  findAll() {
-    return `This action returns all workshopTypeServices`;
+  saveAll(workshopTypeServiceList: WorkshopTypeService[]) {
+    return this.workshopTypeServiceRepository.save(workshopTypeServiceList);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} workshopTypeService`;
+  findByWorshopId(workshopId: number) {
+    return this.workshopTypeServiceRepository.find({
+      where: { workshop: { id: workshopId } },
+      relations: ['typeService'],
+    });
   }
 
-  update(id: number, updateWorkshopTypeServiceDto: WorkshopTypeService) {
-    return `This action updates a #${id} workshopTypeService`;
+  deleteAllByIdIn(workshopTypeServiceList: WorkshopTypeService[]) {
+    return this.workshopTypeServiceRepository.remove(workshopTypeServiceList);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} workshopTypeService`;
+  delete(id: number) {
+    return this.workshopTypeServiceRepository.delete({ id });
   }
 }

@@ -1,34 +1,33 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PersonWorkshopQualification } from 'src/database/entities/PersonWorkshopQualification';
+import { WorkshopPersonService } from 'src/database/entities/WorkshopPersonService';
 import { Repository } from 'typeorm';
 
 @Injectable()
 export class PersonWorkshopQualificationService {
   constructor(
     @InjectRepository(PersonWorkshopQualification)
-    private Repository: Repository<PersonWorkshopQualification>,
+    private personWorkshopQualificationRepository: Repository<PersonWorkshopQualification>,
+    @InjectRepository(WorkshopPersonService)
+    private workshopPersonServiceRepository: Repository<WorkshopPersonService>,
   ) {}
-  create(createPersonWorkshopQualificationDto: PersonWorkshopQualification) {
-    return 'This action adds a new personWorkshopQualification';
+  create(personWorkshopQualification: PersonWorkshopQualification) {
+    this.workshopPersonServiceRepository
+      .findOne({
+        id: personWorkshopQualification.workShopPersonService.id,
+      })
+      .then((result) => {
+        result.personWorkshopQualification = personWorkshopQualification;
+        this.workshopPersonServiceRepository.save(result);
+      });
   }
 
-  findAll() {
-    return `This action returns all personWorkshopQualification`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} personWorkshopQualification`;
-  }
-
-  update(
-    id: number,
-    updatePersonWorkshopQualificationDto: PersonWorkshopQualification,
-  ) {
-    return `This action updates a #${id} personWorkshopQualification`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} personWorkshopQualification`;
+  findByWorkshopPersonServiceId(workshopPersonServiceId: number) {
+    return this.personWorkshopQualificationRepository.find({
+      where: {
+        workshopPersonService: { id: workshopPersonServiceId },
+      },
+    });
   }
 }
