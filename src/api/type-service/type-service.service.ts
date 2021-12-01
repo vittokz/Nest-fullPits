@@ -10,22 +10,18 @@ export class TypeServiceService {
     private typeServiceRepository: Repository<TypeService>,
   ) {}
   create(createTypeServiceDto: TypeService) {
-    return 'This action adds a new typeService';
+    return this.typeServiceRepository.save(createTypeServiceDto);
   }
 
   findAll() {
-    return `This action returns all typeService`;
+    return this.typeServiceRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} typeService`;
-  }
-
-  update(id: number, updateTypeServiceDto: TypeService) {
-    return `This action updates a #${id} typeService`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} typeService`;
+  findAvailable() {
+    return this.typeServiceRepository
+      .createQueryBuilder('type_services')
+      .distinctOn(['type_services.id'])
+      .innerJoin('type_services.workshopTypeServices', 'alias')
+      .getMany();
   }
 }

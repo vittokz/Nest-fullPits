@@ -1,16 +1,8 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Query, Put } from '@nestjs/common';
 import { Person } from 'src/database/entities/Persona';
 import { PersonService } from './person.service';
 
-@Controller('person')
+@Controller('persona')
 export class PersonController {
   constructor(private readonly personService: PersonService) {}
 
@@ -19,23 +11,36 @@ export class PersonController {
     return this.personService.create(createPersonDto);
   }
 
-  @Get()
-  findAll() {
-    return this.personService.findAll();
+  @Get('getByUserId')
+  findByUserId(@Query('id') id: number) {
+    return this.personService.findByUserId(id);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.personService.findOne(+id);
+  @Get('get-by-id')
+  findById(@Query('id') id: number) {
+    return this.personService.findById(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePersonDto: Person) {
-    return this.personService.update(+id, updatePersonDto);
+  @Get('get-by-phone-number')
+  findByPhoneNumberLike(@Query('phoneNumber') phoneNumber: string) {
+    return this.personService.findByPhoneNumberLike(phoneNumber);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.personService.remove(+id);
+  @Get('get-paginated')
+  findAllPaginated(
+    @Query('limit') limit: number,
+    @Query('start') start: number,
+  ) {
+    return this.personService.findAllPaginated(limit, start);
+  }
+
+  @Get('get-by-name-like')
+  findByNameLike(@Query('name') name: string) {
+    return this.personService.findByNameLike(name);
+  }
+
+  @Put()
+  update(@Body() updatePersonDto: Person) {
+    return this.personService.update(updatePersonDto);
   }
 }

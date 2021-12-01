@@ -24,18 +24,8 @@ export class TypeServiceController {
     return this.typeServiceService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.typeServiceService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTypeServiceDto: TypeService) {
-    return this.typeServiceService.update(+id, updateTypeServiceDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.typeServiceService.remove(+id);
+  @Get('available')
+  findAvailable() {
+    return this.typeServiceService.findAvailable();
   }
 }

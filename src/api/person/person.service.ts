@@ -1,30 +1,59 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Person } from 'src/database/entities/Persona';
-import { Repository } from 'typeorm';
+import { ETypePerson } from 'src/enums/ETypePerson';
+import { Like, Repository } from 'typeorm';
 
 @Injectable()
 export class PersonService {
   constructor(
-    @InjectRepository(Person) private Repository: Repository<Person>,
+    @InjectRepository(Person) private personRepository: Repository<Person>,
   ) {}
   create(createPersonDto: Person) {
-    return 'This action adds a new person';
+    return this.personRepository.save(createPersonDto);
   }
 
-  findAll() {
-    return `This action returns all person`;
+  update(createPersonDto: Person) {
+    this.findById(createPersonDto.id).then((person) => {
+      person.nombres = createPersonDto.nombres;
+      person.apellidos = createPersonDto.apellidos;
+      person.identificacion = createPersonDto.identificacion;
+      person.genero = createPersonDto.genero;
+      person.phoneNumber = createPersonDto.phoneNumber;
+      person.fechaNacimiento = createPersonDto.fechaNacimiento;
+
+      this.personRepository.save(person);
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} person`;
+  findById(id: number) {
+    return this.personRepository.findOne(id);
   }
 
-  update(id: number, updatePersonDto: Person) {
-    return `This action updates a #${id} person`;
+  findByUserId(id: number) {
+    return this.personRepository.find({
+      where: { userId: id },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} person`;
+  findAllPaginated(limit: number, start: number) {
+    return this.personRepository.find({
+      where: { type: ETypePerson.PERSONA_REGULAR },
+      take: limit,
+      skip: start,
+    });
+  }
+
+  findByPhoneNumberLike(phoneNumber: string) {
+    return this.personRepository.find({
+      where: { phoneNumber: Like('%' + phoneNumber + '%') },
+    });
+  }
+
+  findByNameLike(name: string) {
+    return this.personRepository.find({
+      where: { nombres: Like('%' + name + '%') },
+      take: 10,
+    });
   }
 }
