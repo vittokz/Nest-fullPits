@@ -1,16 +1,8 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Query } from '@nestjs/common';
 import { Text } from 'src/database/entities/Text';
 import { TextService } from './text.service';
 
-@Controller('text')
+@Controller('texts')
 export class TextController {
   constructor(private readonly textService: TextService) {}
 
@@ -20,22 +12,7 @@ export class TextController {
   }
 
   @Get()
-  findAll() {
-    return this.textService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.textService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTextDto: Text) {
-    return this.textService.update(+id, updateTextDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.textService.remove(+id);
+  findOne(@Query('id') id: number) {
+    return this.textService.findOne(id);
   }
 }

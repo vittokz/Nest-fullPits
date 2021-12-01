@@ -1,31 +1,30 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TypeVehicle } from 'src/database/entities/TypeVehicle';
+import { Workshop } from 'src/database/entities/Workshop';
 import { Repository } from 'typeorm';
 
 @Injectable()
 export class TypeVehicleService {
   constructor(
     @InjectRepository(TypeVehicle)
-    private Repository: Repository<TypeVehicle>,
+    private typeVehicleRepository: Repository<TypeVehicle>,
+    @InjectRepository(Workshop)
+    private workshopRepository: Repository<Workshop>,
   ) {}
-  create(createTypeVehicleDto: TypeVehicle) {
-    return 'This action adds a new typeVehicle';
-  }
 
   findAll() {
-    return `This action returns all typeVehicle`;
+    return this.typeVehicleRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} typeVehicle`;
-  }
-
-  update(id: number, updateTypeVehicleDto: TypeVehicle) {
-    return `This action updates a #${id} typeVehicle`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} typeVehicle`;
+  findByWorkShopId(workshopId: number) {
+    this.workshopRepository
+      .findOne({
+        where: { id: workshopId },
+        relations: ['typeVehicleList'],
+      })
+      .then((workshop) => {
+        return workshop.typeVehicleList;
+      });
   }
 }

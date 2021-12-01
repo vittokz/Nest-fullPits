@@ -7,25 +7,13 @@ import { Repository } from 'typeorm';
 export class TextService {
   constructor(
     @InjectRepository(Text)
-    private Repository: Repository<Text>,
+    private textRepository: Repository<Text>,
   ) {}
   create(createTextDto: Text) {
-    return 'This action adds a new text';
-  }
-
-  findAll() {
-    return `This action returns all text`;
+    return this.textRepository.save(createTextDto);
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} text`;
-  }
-
-  update(id: number, updateTextDto: Text) {
-    return `This action updates a #${id} text`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} text`;
+    return this.textRepository.findOne({ id: id });
   }
 }

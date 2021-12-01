@@ -7,7 +7,7 @@ import { Repository } from 'typeorm';
 export class TypeServiceService {
   constructor(
     @InjectRepository(TypeService)
-    private Repository: Repository<TypeService>,
+    private typeServiceRepository: Repository<TypeService>,
   ) {}
   create(createTypeServiceDto: TypeService) {
     return 'This action adds a new typeService';

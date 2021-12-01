@@ -9,6 +9,7 @@ export class PaymentMethodService {
   constructor(
     @InjectRepository(PaymentMethod)
     private paymentMethodRepository: Repository<PaymentMethod>,
+    @InjectRepository(Workshop)
     private workshopRepository: Repository<Workshop>,
   ) {}
   create(createPaymentMethodDto: PaymentMethod) {
@@ -16,10 +17,14 @@ export class PaymentMethodService {
   }
 
   findByWorkshopId(workshopId: number) {
-    return this.workshopRepository.findOne({
-      where: { id: workshopId },
-      relations: ['paymentMethodList'],
-    });
+    this.workshopRepository
+      .findOne({
+        where: { id: workshopId },
+        relations: ['paymentMethodList'],
+      })
+      .then((workshop) => {
+        return workshop.paymentMethodList;
+      });
   }
 
   findById(id: number) {
