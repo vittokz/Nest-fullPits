@@ -9,13 +9,17 @@ export class PaymentMethodService {
   constructor(
     @InjectRepository(PaymentMethod)
     private paymentMethodRepository: Repository<PaymentMethod>,
+    private workshopRepository: Repository<Workshop>,
   ) {}
   create(createPaymentMethodDto: PaymentMethod) {
     return this.paymentMethodRepository.save(createPaymentMethodDto);
   }
 
-  findByWorkshopId(id: number) {
-    return `This action returns all paymentMethod`;
+  findByWorkshopId(workshopId: number) {
+    return this.workshopRepository.findOne({
+      where: { id: workshopId },
+      relations: ['paymentMethodList'],
+    });
   }
 
   findById(id: number) {

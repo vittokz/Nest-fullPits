@@ -24,10 +24,10 @@ export class PaymentMethodController {
     return this.paymentMethodService.create(createPaymentMethodDto);
   }
 
-  /*@Get('get-by-workshop-id')
-  findByWorkshopId(@Query('id') id: number) {
-    return this.paymentMethodService.findByWorkshopId(id);
-  }*/
+  @Get('get-by-workshop-id')
+  findByWorkshopId(@Query('workshopId') workshopId: number) {
+    return this.paymentMethodService.findByWorkshopId(workshopId);
+  }
 
   @Get('get-by-id')
   findOne(@Query('id') id: number) {
