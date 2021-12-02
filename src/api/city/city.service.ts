@@ -25,12 +25,4 @@ export class CityService {
     });
     return cities;
   }
-
-  update(id: number) {
-    return `This action updates a #${id} city`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} city`;
-  }
 }
